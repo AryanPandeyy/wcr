@@ -15,6 +15,9 @@ fn main() -> io::Result<()> {
         exit(0);
     }
 
+    let mut buffer = String::new();
+    f.read_to_string(&mut buffer)?;
+
     match arg[1].as_ref() {
         "c" => {
             println!("{}",f.bytes().count());
@@ -23,10 +26,10 @@ fn main() -> io::Result<()> {
             println!("{}",f.lines().count());
         }
         "w" => {
-            // 58164 test.txt
-            let mut buffer = String::new();
-            f.read_to_string(&mut buffer)?;
             println!("{:?}", buffer.split_whitespace().count());
+        }
+        "m" => {
+            println!("{:?}", buffer.chars().count());
         }
         _ => {
             println!("Illegal argument");
